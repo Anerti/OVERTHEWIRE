@@ -53,6 +53,7 @@ The password of the next level can be found in a file named `-`.
 backend: gibson-1
 263JGJPfgU6LtdEvgfWU1XP5yac29mFx
 ```
+
 # Level 2 ---> Level 3
 
 The password of the next level can be found in a file named `--space in this filename--` in the `/home/$USER` directory.
@@ -78,5 +79,35 @@ The password of the next level can be found in a file named `--space in this fil
 backend: gibson-1
 MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx
 
+```
+
+# Level 3 ---> Level 4
+
+The password of the next level is in an hidden file in the `/home/$USER` directory.
+
+```bash
+    #!/bin/bash
+
+    sshpass -p "MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx" ssh bandit3@bandit.labs.overthewire.org -p 2220 "ls -la inhere/; cat inhere/...Hiding-From-You"
+```
+
+- `ls` is a command used to list file on the directory provided. The `-l` option tell ls to provide detailled information about the files or directory found in the specified directory.The `-a` option is used to print all files including those who are hidden. All files hidden begin with `.` .The `.` and `..` directory represent respectively  the current directory and the parent directory.
+
+```                      _                     _ _ _
+                        | |__   __ _ _ __   __| (_) |_
+                        | '_ \ / _` | '_ \ / _` | | __|
+                        | |_) | (_| | | | | (_| | | |_
+                        |_.__/ \__,_|_| |_|\__,_|_|\__|
+
+
+                      This is an OverTheWire game server.
+            More information on http://www.overthewire.org/wargames
+
+backend: gibson-1
+total 12
+drwxr-xr-x 2 root    root    4096 Oct 14 09:26 .
+drwxr-xr-x 3 root    root    4096 Oct 14 09:26 ..
+-rw-r----- 1 bandit4 bandit3   33 Oct 14 09:26 ...Hiding-From-You
+    
 ```
 
