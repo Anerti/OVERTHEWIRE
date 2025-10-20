@@ -137,3 +137,31 @@ The password of the next level can be found in the only human-readable file in t
 backend: gibson-0
 4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw
 ```
+
+# Level 5 ---> Level 6
+
+The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties: human-readable, 1033 bytes in size, not executable
+
+```bash
+    #!/bin/bash
+
+    sshpass -p "4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw" ssh bandit5@bandit.labs.overthewire.org -p 2220 "find . -type f -size 1033c -not -executable -exec cat {} +" 
+```
+
+- `-size` flag is used to tell the command to search only a file with 1033 bytes.
+- `-executable` flag is a flag used to search for all executable file in the specified directory. Since `-not` is provided before it, all files that is not executable is expected as the output.
+
+```
+                         _                     _ _ _
+                        | |__   __ _ _ __   __| (_) |_
+                        | '_ \ / _` | '_ \ / _` | | __|
+                        | |_) | (_| | | | | (_| | | |_
+                        |_.__/ \__,_|_| |_|\__,_|_|\__|
+
+
+                      This is an OverTheWire game server.
+            More information on http://www.overthewire.org/wargames
+
+backend: gibson-0
+HWasnPhtq9AVKe0dmk45nxy20cvUa6EG
+``` 
