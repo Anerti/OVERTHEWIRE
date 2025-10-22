@@ -1,4 +1,4 @@
-*notice: The author admits that the reader has read all the explanations from the previous levels in order to understand the explanations provided at level X.*
+*notice: The author admits that the reader has read all the explanations from the previous levels in order to understand the explanations provided at level X. The password or the challenge of any level can change anytime*
 
 # Level 0 ---> Level 1
 
@@ -253,7 +253,7 @@ backend: gibson-1
 4CKMh1JI91bUIZZPXDqGanal4xvAg0JM
 ```
 
-# Level 8 ---> Level 9
+# Level 9 ---> Level 10
 
 The password for the next level is stored in the file data.txt in one of the few human-readable strings, preceded by several ‘=’ characters.
 
