@@ -252,3 +252,33 @@ The password for the next level is stored in the file data.txt and is the only l
 backend: gibson-1
 4CKMh1JI91bUIZZPXDqGanal4xvAg0JM
 ```
+
+# Level 8 ---> Level 9
+
+The password for the next level is stored in the file data.txt in one of the few human-readable strings, preceded by several ‘=’ characters.
+
+```bash
+    #!/bin/bash
+
+    sshpass -p "4CKMh1JI91bUIZZPXDqGanal4xvAg0JM" ssh bandit9@bandit.labs.overthewire.org -p 2220 "strings data.txt | grep ==="
+```
+
+- Unlike `cat`, `strings` command only display human-readable strings. Another alternative is to use `-a` option of `grep` that tells the command to treat binary file as ascii text `grep -a === "data.txt"` but since the output contains binary data, some character is not printable in the terminal and the first option is prefered.
+
+```
+                         _                     _ _ _
+                        | |__   __ _ _ __   __| (_) |_
+                        | '_ \ / _` | '_ \ / _` | | __|
+                        | |_) | (_| | | | | (_| | | |_
+                        |_.__/ \__,_|_| |_|\__,_|_|\__|
+
+
+                      This is an OverTheWire game server.
+            More information on http://www.overthewire.org/wargames
+
+backend: gibson-1
+========== the
+========== password
+f\Z'========== is
+========== FGUW5ilLVJrxX9kMYMmlN4MgbpfMiqey
+```
