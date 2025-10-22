@@ -211,7 +211,7 @@ The password for the next level is stored in the file data.txt next to the word 
 ```
 
 ```
-                             _                     _ _ _
+                         _                     _ _ _
                         | |__   __ _ _ __   __| (_) |_
                         | '_ \ / _` | '_ \ / _` | | __|
                         | |_) | (_| | | | | (_| | | |_
@@ -225,4 +225,30 @@ backend: gibson-1
 millionth       dfwvzFQi4mU0wfNbFOe9RoWskMLg7eEc
 ```
 
+# Level 8 ---> Level 9
 
+The password for the next level is stored in the file data.txt and is the only line of text that occurs only once.
+
+```bash
+    #!/bin/bash
+
+    sshpass -p "dfwvzFQi4mU0wfNbFOe9RoWskMLg7eEc" ssh bandit8@bandit.labs.overthewire.org -p 2220 "cat data.txt | sort | uniq -u"
+```
+
+- `sort` command is used to sort alphabetically the output of the previous command `cat`.
+- `uniq` can report or omit repeated lines and `-u` option display on the screen uniques lines. `uniq -u` work only if all lines are sorted.
+
+```
+                         _                     _ _ _
+                        | |__   __ _ _ __   __| (_) |_
+                        | '_ \ / _` | '_ \ / _` | | __|
+                        | |_) | (_| | | | | (_| | | |_
+                        |_.__/ \__,_|_| |_|\__,_|_|\__|
+
+
+                      This is an OverTheWire game server.
+            More information on http://www.overthewire.org/wargames
+
+backend: gibson-1
+4CKMh1JI91bUIZZPXDqGanal4xvAg0JM
+```
