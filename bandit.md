@@ -175,11 +175,15 @@ HWasnPhtq9AVKe0dmk45nxy20cvUa6EG
 The password for the next level is stored somewhere on the server and has all of the following properties: owned by user bandit7, owned by group bandit6, 33 bytes in size.
 
 ```bash
+    #!/bin/bash
+
+
     sshpass -p "HWasnPhtq9AVKe0dmk45nxy20cvUa6EG" ssh bandit6@bandit.labs.overthewire.org -p 2220 "find / -type f -user bandit7 -group bandit6 -size 33c -
 exec cat {} + 2> /dev/null"
 ```
 
 - The `-user` and `-group` option is used respectively to search for all files owned by bandit7 and where the user group is bandit6.
+- `2>` is used to redirect all errors like `permission denied` into the black hole `/dev/null`. That means that any errors isn't printed on the screen.
 
 ```
                          _                     _ _ _
@@ -195,3 +199,30 @@ exec cat {} + 2> /dev/null"
 backend: gibson-0
 morbNTDkSW6jIlUc0ymOdMaLnOlFVAaj
 ```
+
+# Level 7 ---> Level 8
+
+The password for the next level is stored in the file data.txt next to the word millionth.
+
+```bash
+    #!/bin/bash
+
+    sshpass -p "morbNTDkSW6jIlUc0ymOdMaLnOlFVAaj" ssh bandit7@bandit.labs.overthewire.org -p 2220 "grep millionth data.txt"    
+```
+
+```
+                             _                     _ _ _
+                        | |__   __ _ _ __   __| (_) |_
+                        | '_ \ / _` | '_ \ / _` | | __|
+                        | |_) | (_| | | | | (_| | | |_
+                        |_.__/ \__,_|_| |_|\__,_|_|\__|
+
+
+                      This is an OverTheWire game server.
+            More information on http://www.overthewire.org/wargames
+
+backend: gibson-1
+millionth       dfwvzFQi4mU0wfNbFOe9RoWskMLg7eEc
+```
+
+
