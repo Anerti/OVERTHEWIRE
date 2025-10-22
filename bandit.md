@@ -1,3 +1,5 @@
+*notice: The author admits that the reader has read all the explanations from the previous levels in order to understand the explanations provided at level X.*
+
 # Level 0 ---> Level 1
 
 The password of the next level can be found in the `/home/$USER` once logged on the remote server.
@@ -12,6 +14,8 @@ The password of the next level can be found in the `/home/$USER` once logged on 
 - `#!/bin/bash` is a 'shebang' that tell the local machine what interpreter to use before executing the script.
 - `sshpass` is a command that simulate user interaction on the terminal by injecting the password provided after the `-p` option.
 - `ssh` is a command used to connect to remote server by providing the username and domain name separated by '@' of the remote machine. Since the ssh service doesn't run on the default port 22, the -p option tell which port is used. The argument between "" execute the command specified once logged.
+- `grep` is a command used to search for a pattern on one or more files.
+- `*` is a wildcard that can replace any character or string.
 
 ```
                          _                     _ _ _
@@ -165,3 +169,29 @@ The password for the next level is stored in a file somewhere under the inhere d
 backend: gibson-0
 HWasnPhtq9AVKe0dmk45nxy20cvUa6EG
 ``` 
+
+# Level 6 ---> Level 7
+
+The password for the next level is stored somewhere on the server and has all of the following properties: owned by user bandit7, owned by group bandit6, 33 bytes in size.
+
+```bash
+    sshpass -p "HWasnPhtq9AVKe0dmk45nxy20cvUa6EG" ssh bandit6@bandit.labs.overthewire.org -p 2220 "find / -type f -user bandit7 -group bandit6 -size 33c -
+exec cat {} + 2> /dev/null"
+```
+
+- The `-user` and `-group` option is used respectively to search for all files owned by bandit7 and where the user group is bandit6.
+
+```
+                         _                     _ _ _
+                        | |__   __ _ _ __   __| (_) |_
+                        | '_ \ / _` | '_ \ / _` | | __|
+                        | |_) | (_| | | | | (_| | | |_
+                        |_.__/ \__,_|_| |_|\__,_|_|\__|
+
+
+                      This is an OverTheWire game server.
+            More information on http://www.overthewire.org/wargames
+
+backend: gibson-0
+morbNTDkSW6jIlUc0ymOdMaLnOlFVAaj
+```
