@@ -310,3 +310,29 @@ backend: gibson-1
 The password is dtR173fZKb0RRsDFSGsg2RWnpNVj3qRr
 ```
 
+# Level 11 ---> Level 12
+
+The password for the next level is stored in the file data.txt, where all lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions.
+
+```bash
+    #!/bin/bash
+
+    sshpass -p "dtR173fZKb0RRsDFSGsg2RWnpNVj3qRr" ssh bandit11@bandit.labs.overthewire.org -p 2220 "tr 'a-zA-Z' 'n-za-mN-ZA-M' < data.txt" 
+```
+
+- Rotating characters by x positions is called Caesar cipher. The `tr` command allow translating or deleting characters. Here the command is tasking to replace a to n, b to m, c to o ... and the same operation applies to uppercase character from the provided input `data.txt`. But digit remains unchanged.
+
+```
+                         _                     _ _ _
+                        | |__   __ _ _ __   __| (_) |_
+                        | '_ \ / _` | '_ \ / _` | | __|
+                        | |_) | (_| | | | | (_| | | |_
+                        |_.__/ \__,_|_| |_|\__,_|_|\__|
+
+
+                      This is an OverTheWire game server.
+            More information on http://www.overthewire.org/wargames
+
+backend: gibson-1
+The password is dtR173fZKb0RRsDFSGsg2RWnpNVj3qRr
+``` 
