@@ -1,4 +1,9 @@
-*notice: The author admits that the reader has read all the explanations from the previous levels in order to understand the explanations provided at level X. The password or the challenge of any level can change anytime*
+*notice*: 
+- The author admits that the reader has read all the explanations from the previous levels in order to understand the explanations provided at level X. The password or the challenge of any level can change anytime*.
+- *All script provided below are tested in unix like operating system Ubuntu 24.04.3 LTS. If a command in a script is not found execute* `sudo apt-get update && apt install name_of_the_command` *before executing the script* 
+- *To execute any of the script provided below, copy and paste it into a blanck file and give it the right permission before execution it* `chmod +x name_of_the_file.sh && ./name_of_the_file.sh`.
+
+
 
 # Level 0 ---> Level 1
 
