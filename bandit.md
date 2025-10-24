@@ -282,3 +282,31 @@ backend: gibson-1
 f\Z'========== is
 ========== FGUW5ilLVJrxX9kMYMmlN4MgbpfMiqey
 ```
+
+# Level 10 ---> Level 11
+
+The password for the next level is stored in the file data.txt, which contains base64 encoded data.
+
+```bash
+    #!/bin/bash
+
+    sshpass -p "FGUW5ilLVJrxX9kMYMmlN4MgbpfMiqey" ssh bandit10@bandit.labs.overthewire.org -p 2220 "base64 -d data.txt"
+```
+
+- Base64 encoding is a binary-to-text encoding scheme that converts binary data into an ASCII string format. The `base64` command is a built-in linux command that allow encode/decode data and print to standard output. By default this command encode data provided from input into a basse64 and `-d` option do the reverse operation.
+
+```
+                         _                     _ _ _
+                        | |__   __ _ _ __   __| (_) |_
+                        | '_ \ / _` | '_ \ / _` | | __|
+                        | |_) | (_| | | | | (_| | | |_
+                        |_.__/ \__,_|_| |_|\__,_|_|\__|
+
+
+                      This is an OverTheWire game server.
+            More information on http://www.overthewire.org/wargames
+
+backend: gibson-1
+The password is dtR173fZKb0RRsDFSGsg2RWnpNVj3qRr
+```
+
