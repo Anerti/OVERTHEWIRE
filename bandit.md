@@ -334,8 +334,8 @@ The password for the next level is stored in the file data.txt, where all lowerc
             More information on http://www.overthewire.org/wargames
 
 backend: gibson-1
-The password is dtR173fZKb0RRsDFSGsg2RWnpNVj3qRr
-``` 
+The password is 7x16WNeHIi5YkIhWsfFIqoognUTyj9Q4
+```
 
 # Level 12 ---> Level 13
 
