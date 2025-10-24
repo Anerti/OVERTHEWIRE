@@ -431,3 +431,34 @@ Private key downloaded to /home/anerti/
 ```
 
 # Level 14 ---> Level 15
+
+The password for the next level can be retrieved by submitting the password of the current level to port 30000 on localhost.
+
+*notice: This level depends on the previous level because the sshkey.private file need to be downloaded to /home/$USER*
+
+```bash
+    #!/bin/bash
+
+    chmod 600 /home/$USER/sshkey.private && ssh bandit14@bandit.labs.overthewire.org -p 2220 -i /home/$USER/sshkey.private "nc -v localhost 30000 < /etc/bandit_pass/\$USER"
+```
+
+- `chmod` change the file permission to set read and write permission for the owner (`600`) of the file provided. If the permission is not correctly set, An issue will occurs during the ssh connection.
+- The `-i` option tell ssh to use the private key provided instead of using a password to login
+- `nc` enable UDP or TCP connection to a machine in the same network. `-v` option tell the command to make verbose output, the `localhost` or `127.0.0.1` is the ip address of a local machine and 30000 is the port in which to connect. Once the connection is established, the file located in `/etc/bandit_pass/$USER` will be sent. Another alternative is to use `telnet`.
+
+```                      _                     _ _ _
+                        | |__   __ _ _ __   __| (_) |_
+                        | '_ \ / _` | '_ \ / _` | | __|
+                        | |_) | (_| | | | | (_| | | |_
+                        |_.__/ \__,_|_| |_|\__,_|_|\__|
+
+
+                      This is an OverTheWire game server.
+            More information on http://www.overthewire.org/wargames
+
+backend: gibson-1
+Connection to localhost (127.0.0.1) 30000 port [tcp/*] succeeded!
+Correct!
+8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQo
+```
+
