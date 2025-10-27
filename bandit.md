@@ -467,3 +467,32 @@ Correct!
 8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQo
 ```
 
+# Level 15 ---> Level 16
+
+The password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using SSL/TLS encryption.
+
+```bash
+    #!/bin/bash
+
+    sshpass -p "8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQo" ssh bandit15@bandit.labs.overthewire.org -p 2220 "ncat --ssl localhost 30001 <<< 8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQo"     
+```
+
+- `ncat` is like `nc` but the communication can be encrypted with ssl by using `--ssl` option to communicate to https server according to the [Official documentation](https://nmap.org/ncat/guide/ncat-ssl.html). 
+- Another method is using `openssl` to submit the password over ssl/tls encrypted communication `openssl s_client localhost:30001`. According to the man page `s_client` option implements a generic SSL/TLS client which can establish a transparent connection to a remote server speaking SSL/TLS. Once the connection is established, the password must be submited manually. 
+
+```
+                         _                     _ _ _
+                        | |__   __ _ _ __   __| (_) |_
+                        | '_ \ / _` | '_ \ / _` | | __|
+                        | |_) | (_| | | | | (_| | | |_
+                        |_.__/ \__,_|_| |_|\__,_|_|\__|
+
+
+                      This is an OverTheWire game server.
+            More information on http://www.overthewire.org/wargames
+
+backend: gibson-1
+Correct!
+kSkvUpMQ7lBYyCM4GBPvCvT1BfWRy0Dx
+```
+
