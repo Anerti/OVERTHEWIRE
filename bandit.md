@@ -652,3 +652,30 @@ The password for the next level is stored in a file readme in the homedirectory.
 backend: gibson-1
 cGWpMaKXVwDUNgPAVJbWYuGHVn9zl3j8
 ```
+
+# Level 19 --> Level 20
+
+The password for this level can be found in the usual place (/etc/bandit_pass), after the setuid binary has been used.
+
+```bash
+    #!/bin/bash
+
+    sshpass -p "cGWpMaKXVwDUNgPAVJbWYuGHVn9zl3j8" ssh bandit19@bandit.labs.overthewire.org -p 2220 "ls -l bandit20-do; ./bandit20-do cat /etc/bandit_pass/bandit20
+```
+- A setuid binary is a file that will always execute with the privileges of its owner.
+
+```
+                         _                     _ _ _
+                        | |__   __ _ _ __   __| (_) |_
+                        | '_ \ / _` | '_ \ / _` | | __|
+                        | |_) | (_| | | | | (_| | | |_
+                        |_.__/ \__,_|_| |_|\__,_|_|\__|
+
+
+                      This is an OverTheWire game server.
+            More information on http://www.overthewire.org/wargames
+
+backend: gibson-1
+-rwsr-x--- 1 bandit20 bandit19 14884 Oct 14 09:26 bandit20-do
+0qXahG8ZjOVMN9Ghs7iOWsCfZyXOUbYO
+```
