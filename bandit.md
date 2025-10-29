@@ -679,3 +679,46 @@ backend: gibson-1
 -rwsr-x--- 1 bandit20 bandit19 14884 Oct 14 09:26 bandit20-do
 0qXahG8ZjOVMN9Ghs7iOWsCfZyXOUbYO
 ```
+
+# Level 20 ---> Level 21
+
+There is a setuid binary in the homedirectory that does the following: it makes a connection to localhost on the port you specify as a commandline argument. It then reads a line of text from the connection and compares it to the password in the previous level (bandit20). If the password is correct, it will transmit the password for the next level (bandit21).
+
+*Notice: This level require 2 terminal*
+
+```bash
+    #!bin/bash
+
+    sshpass -p "0qXahG8ZjOVMN9Ghs7iOWsCfZyXOUbYO" ssh bandit20@bandit.labs.overthewire.org -p 2220 "nc -lvnp 4444 <<< 0qXahG8ZjOVMN9Ghs7iOWsCfZyXOUbYO"
+```
+- On the first terminal, run the script above to start Netcat. The `-l` option makes Netcat listen on the specified port `-p` 4444, which binds to all interfaces by default, and the `-n` option disables DNS resolution to speed up the process. 
+- The <<< operator sends the specified password.
+
+
+```bash
+    #!/bin/bash
+
+    sshpass -p "0qXahG8ZjOVMN9Ghs7iOWsCfZyXOUbYO" ssh bandit20@bandit.labs.overthewire.org -p 2220 "./suconnect 4444"
+```
+- Once a notification `Listening on 0.0.0.0 4444` appears in the first terminal, run the script above that connects to that terminal. 
+- The suconnect program is a set‑uid binary that likely looks something like this: `nc localhost $PORT <<< "password"`.
+
+In short, this establishes a reverse shell: the remote machine waits for an incoming connection, and the target machine executes a script that connects back to the remote host.
+
+
+```
+                         _                     _ _ _
+                        | |__   __ _ _ __   __| (_) |_
+                        | '_ \ / _` | '_ \ / _` | | __|
+                        | |_) | (_| | | | | (_| | | |_
+                        |_.__/ \__,_|_| |_|\__,_|_|\__|
+
+
+                      This is an OverTheWire game server.
+            More information on http://www.overthewire.org/wargames
+
+backend: gibson-1
+Listening on 0.0.0.0 4444
+EeoULMCra2q0dSkYj561DX7s1CpBuOBt
+Connection received on 127.0.0.1 54300
+```
