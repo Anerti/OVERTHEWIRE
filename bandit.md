@@ -627,3 +627,28 @@ backend: gibson-1
 ---
 > pGozC8kOHLkBMOaL0ICPvLV1IjQ5F1VA
 ```
+
+# Level 18 ---> Level 19
+
+The password for the next level is stored in a file readme in the homedirectory. Unfortunately, someone has modified .bashrc to log in out when logged in with SSH.
+
+```bash
+    #!/bin/bash
+
+    sshpass -p "x2gLTTjFwMOhQ8oWNbMN362QKxfRqGlO" ssh bandit18@bandit.labs.overthewire.org -p 2220 "cat readme"
+```
+
+```
+                         _                     _ _ _
+                        | |__   __ _ _ __   __| (_) |_
+                        | '_ \ / _` | '_ \ / _` | | __|
+                        | |_) | (_| | | | | (_| | | |_
+                        |_.__/ \__,_|_| |_|\__,_|_|\__|
+
+
+                      This is an OverTheWire game server.
+            More information on http://www.overthewire.org/wargames
+
+backend: gibson-1
+cGWpMaKXVwDUNgPAVJbWYuGHVn9zl3j8
+```
