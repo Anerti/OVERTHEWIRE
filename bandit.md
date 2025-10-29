@@ -508,6 +508,7 @@ The credentials for the next level can be retrieved by submitting the password o
 
 - nmap (Network Mapper) is a tool commonly used to discover hosts and scan their ports. In this script, `localhost` is the target, and `-p 31000‑32000` specifies the range of ports to scan. The `-oG` option tells `nmap` to save the results in a greppable format to `$DIR/target`.
 - The loop `for port in $PORTS; do COMMAND; done` repeats a command for each port found by the scan. The ports are extracted from the greppable output using `grep -oE '[0-9]{5}'`, which matches five‑digit numbers. For each extracted port, the command `ncat --ssl localhost $port <<< 'kSkvUpMQ7lBYyCM4GBPvCvT1BfWRy0Dx'` is executed, sending the password over an SSL‑encrypted connection.
+- Another method to scan ports between 31000 and 32000 is to use `nc -zv localhost 31000‑32000 2>&1 | grep succeeded` instead of `nmap`. The `-z` option tells Netcat to scan the ports, and `2>&1` redirects all error output to stdout so that it makes it possible to filter the successful connections with `grep`.
 
 
 ```
