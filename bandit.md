@@ -722,3 +722,62 @@ Listening on 0.0.0.0 4444
 EeoULMCra2q0dSkYj561DX7s1CpBuOBt
 Connection received on 127.0.0.1 54300
 ```
+
+# Level 21 ---> Level 22
+
+A program is running automatically at regular intervals from cron, the time-based job scheduler.
+
+```bash
+    #!/bin/bash
+
+
+    sshpass -p "EeoULMCra2q0dSkYj561DX7s1CpBuOBt" ssh bandit21@bandit.labs.overthewire.org -p 2220 "find /etc/cron.d/ -type f -readable -exec cat {} +; echo -e '\n\n'; cat /usr/bin/cronjob_bandit22.sh; echo -en '\n\nThe password of the next level is: '; cat /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv"
+```
+
+- The `-readable` option in `find` matches files that are readable by the current user (bandit21 in this case) and displays them using `-exec`.
+- The /etc/cron.d directory holds all additional configuration files for the cron daemon to schedule tasks.
+- Since `/usr/bin/cronjob_bandit22.sh` looks interesting, its contents reveal that a copy of the next‑level password is stored in the file `/tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv`.
+
+
+```
+                         _                     _ _ _
+                        | |__   __ _ _ __   __| (_) |_
+                        | '_ \ / _` | '_ \ / _` | | __|
+                        | |_) | (_| | | | | (_| | | |_
+                        |_.__/ \__,_|_| |_|\__,_|_|\__|
+
+
+                      This is an OverTheWire game server.
+            More information on http://www.overthewire.org/wargames
+
+backend: gibson-1
+@reboot bandit22 /usr/bin/cronjob_bandit22.sh &> /dev/null
+* * * * * bandit22 /usr/bin/cronjob_bandit22.sh &> /dev/null
+@reboot bandit23 /usr/bin/cronjob_bandit23.sh  &> /dev/null
+* * * * * bandit23 /usr/bin/cronjob_bandit23.sh  &> /dev/null
+30 3 * * 0 root test -e /run/systemd/system || SERVICE_MODE=1 /usr/lib/x86_64-linux-gnu/e2fsprogs/e2scrub_all_cron
+10 3 * * * root test -e /run/systemd/system || SERVICE_MODE=1 /sbin/e2scrub_all -A -r
+# DO NOT EDIT OR REMOVE
+# This file is a simple placeholder to keep dpkg from removing this directory
+# The first element of the path is a directory where the debian-sa1
+# script is located
+PATH=/usr/lib/sysstat:/usr/sbin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# Activity reports every 10 minutes everyday
+5-55/10 * * * * root command -v debian-sa1 > /dev/null && debian-sa1 1 1
+
+# Additional run at 23:59 to rotate the statistics file
+59 23 * * * root command -v debian-sa1 > /dev/null && debian-sa1 60 2
+@reboot bandit24 /usr/bin/cronjob_bandit24.sh &> /dev/null
+* * * * * bandit24 /usr/bin/cronjob_bandit24.sh &> /dev/null
+*/30 * * * * root find /tmp -amin 60 -type f -delete &> /dev/null && find /tmp -amin 5 -type d -empty -delete &> /dev/null
+
+
+
+#!/bin/bash
+chmod 644 /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+cat /etc/bandit_pass/bandit22 > /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+
+
+The password of the next level is: tRae0UfB9v0UzbCdn9cY0gQnds9GF58Q
+```
